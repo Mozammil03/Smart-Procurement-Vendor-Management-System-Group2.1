@@ -25,6 +25,9 @@
 
 import api from "./axios";
 
+
+
+
 export const uploadDocument = (data) => {
   return api.post("/api/vendor-documents", data);
 };
@@ -46,9 +49,25 @@ export const submitInvoice = (data) => {
 };
 
 export const getVendorRatings = (vendorId) => {
-  return api.get(`/api/vendor-ratings?vendorId=${vendorId}`);
+  return api.get(`/api/vendor-ratings/vendor/${vendorId}`);
+};
+
+export const getVendorAverageRating = (vendorId) => {
+  return api.get(`/api/vendor-ratings/vendor/${vendorId}/average`);
+};
+
+export const getAdminVendorRatings = () => {
+  return api.get(`/api/vendor-ratings/admin/ratings`);
+};
+
+export const createAdminVendorRating = (payload) => {
+  return api.post(`/api/vendor-ratings/admin/rate`, payload);
 };
 
 export const getVendorPOs = (vendorId) => {
   return api.get(`/po?vendorId=${vendorId}`);
 };
+
+export const deleteVendorRatings = (vendorId) => {
+  return api.post(`/api/vendor-ratings/admin/delete/${vendorId}`);
+}

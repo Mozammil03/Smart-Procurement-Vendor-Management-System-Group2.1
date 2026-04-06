@@ -36,6 +36,7 @@ import TrackStatus from '../pages/employee/TrackStatus';
 import VendorRegister from "../pages/vendor-register/VendorRegister";
 
 import VendorApproval from "../pages/admin/VendorApproval";
+import AdminVendorRatings from "../pages/admin/AdminVendorRatings";
 
 import ProtectedRoute from "../components/ProtectedRoute";
 import  ProcessPayment from "../pages/finance/ProcessPayment";
@@ -47,9 +48,7 @@ function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/master/roles" element={<Roles/>} />
-<Route path="/master/departments" element={<Departments/>} />
-<Route path="/master/users" element={<Users/>} />
+      
 
  {/* <Route path="/" element={<Login />} /> */}
 
@@ -66,27 +65,41 @@ function AppRouter() {
 <Route path="/employee/track-status" element={<TrackStatus />} />
  {/* <Route path="/employee" element={<EmployeeDashboard />} /> */}
     <Route path="/manager" element={<ManagerDashboard />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+    <Route path="/admin" element={<AdminDashboard />}>
+      <Route path="items" element={<Items />} />
+      <Route path="PurchaseOrder" element={<PurchaseOrder />} />
+      <Route path="Inventory" element={<Inventory />} />
+      <Route
+        path="VendorApproval"
+        element={
+          <ProtectedRoute allowedRoles={["ADMIN"]}>
+            <VendorApproval />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="vendor-ratings"
+        element={
+          <ProtectedRoute allowedRoles={["ADMIN"]}>
+            <AdminVendorRatings />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="roles" element={<Roles />} />
+      <Route path="departments" element={<Departments />} />
+      <Route path="users" element={<Users />} />
+    </Route>
         <Route path="/finance" element={<FinanceDashboard />} />
           {/* <Route path="/employee/requisition" element={<CreateRequisition/>}/> */}
-         <Route path="/admin/items" element={<Items/>} />
-
-       <Route path="/admin/PurchaseOrder" element={<PurchaseOrder />} />
-    <Route path="/admin/Inventory" element={<Inventory />} />
+    {/* Removed standalone admin/items, admin/PurchaseOrder, admin/Inventory routes */}
 
             <Route path="/pages/vendor-register/VendorRegister" element={<VendorRegister />} />
    
 
         <Route path="/VendorApproval" element={<VendorRegister />} />
-        <Route
-  path="/admin/VendorApproval"
-  element={
-    <ProtectedRoute allowedRoles={["ADMIN"]}>
-      <VendorApproval />
-    </ProtectedRoute>
-  }
-/>
 
+
+    {/* Removed duplicate /admin/VendorApproval and /admin/vendor-ratings routes */}
 
 
 
@@ -103,7 +116,7 @@ function AppRouter() {
   <Route path="ViewPurchaseOrders" element={<ViewPurchaseOrders />} />
   <Route path="UploadDocuments" element={<UploadDocuments />} />
   <Route path="SubmitInvoice" element={<SubmitInvoice />} />
-  <Route path="VendorRatings" element={<VendorRatings />} />
+  <Route path="ratings" element={<VendorRatings />} />
 </Route>
 
 
@@ -138,21 +151,6 @@ function AppRouter() {
   <Route path="pending" element={<PendingApprovals />} />
   <Route path="approved" element={<ApprovedRequests />} />
 </Route>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

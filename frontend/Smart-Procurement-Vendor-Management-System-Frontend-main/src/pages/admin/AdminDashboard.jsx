@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useLocation,Link } from "react-router-dom";
+import { useNavigate, useLocation,Link, Outlet } from "react-router-dom";
 
 import {
  Box, 
@@ -25,6 +25,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import StarIcon from '@mui/icons-material/Star';
 
 const drawerWidth = 260;
 
@@ -56,22 +57,24 @@ export default function AdminDashboard() {
   const navigate = useNavigate();
   const location = useLocation();
 
+
   const logout = () => {
     localStorage.clear();
     navigate("/");
   };
 
   const menuItems = [
-    { text: "Roles", icon: <VerifiedUserIcon />, path: "/master/roles" },
-    { text: "Departments", icon: <BusinessCenterIcon />, path: "/master/departments" },
-    { text: "Users", icon: <PeopleIcon />, path: "/master/users" },
+    { text: "Roles", icon: <VerifiedUserIcon />, path: "/admin/roles" },
+    { text: "Departments", icon: <BusinessCenterIcon />, path: "/admin/departments" },
+    { text: "Users", icon: <PeopleIcon />, path: "/admin/users" },
   ];
 
   const procurementItems = [
     { text: "Items", icon: <InventoryIcon />, path: "/admin/items" },
     { text: "Purchase Order", icon: <ShoppingCartIcon />, path: "/admin/PurchaseOrder" },
-    {text: "Inventory",icon:<InventoryIcon/> ,path:"/admin/Inventory"},
+    { text: "Inventory", icon: <InventoryIcon />, path: "/admin/Inventory" },
     { text: "Vendor Approval", icon: <VerifiedUserIcon />, path: "/admin/VendorApproval" },
+    { text: "Vendor Ratings", icon: <StarIcon />, path: "/admin/vendor-ratings" },
   ];
 
   return (
@@ -139,6 +142,7 @@ export default function AdminDashboard() {
                   {item.icon}
                   </ListItemIcon>
                 <ListItemText primary={item.text} primaryTypographyProps={{ fontSize: '0.9rem' }} />
+                
               </ListItemButton>
             ))}
           </List>
@@ -153,7 +157,8 @@ export default function AdminDashboard() {
 
 
       <Box component="main" sx={{ flexGrow: 1, p: 4 }}>
-        <Toolbar />
+        <Outlet/>
+        {location.pathname == "/admin"?<div><Toolbar />
         <Typography variant="h4" sx={{ mb: 1, fontWeight: 'bold' }}>
         {/* <DashboardIcon sx={{ fontSize: 40, color: "#1976d2" }} /> */}
         Dashboard Overview
@@ -165,7 +170,7 @@ export default function AdminDashboard() {
           <StatCard title="Active Vendors" value="48" color="#1976d2" />
           <StatCard title="Total Orders" value="156" color="#2e7d32" />
           <StatCard title="Inventory Alerts" value="5" color="#d32f2f" />
-        </Grid>
+        </Grid></div>:<></>}
       </Box>
     </Box>
   );

@@ -176,13 +176,13 @@ export default function Home() {
         <GroupsIcon />
       </Avatar>
       <Typography variant="h5" sx={{ fontWeight: 700 }}>Collaboration & Core Dev</Typography>
-      <Typography color="primary" gutterBottom sx={{ fontWeight: 600 }}>Partha, Ganesh & Presentation Team</Typography>
+      <Typography color="primary" gutterBottom sx={{ fontWeight: 600 }}>Partha, Ganesh, Mozammil & Presentation Team</Typography>
     
 
       <Typography variant="body2" sx={{ color: "#666", mt: 2 }}>
         A massive shoutout to <strong>Partha</strong>, who architected and designed the vast 
         majority of the platform's interface and frontend logic. Special thanks to 
-        <strong> Ganesh</strong> for his contributions to the design modules and the 
+        <strong> Ganesh</strong> for his contributions to the design modules, thanks to <strong>Mozammil</strong> for working on rating feature and the 
         dedicated presentation team.
       </Typography>
     </CardContent>
